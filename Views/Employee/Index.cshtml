@@ -1,0 +1,50 @@
+﻿@model List<Crud_App_ASP_NETCoreMVC.Models.EmpTb>
+
+@{
+    ViewData["Title"] = "Employee Management";
+}
+
+<h1>Employee List</h1>
+
+<p>
+    <a asp-controller="Employee" asp-action="Add" class="btn btn-primary mt-2">Create New Employee</a>
+</p>
+
+
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>EmpId</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Designation</th>
+                <th>Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.EmpId</td>
+                    <td>@emp.EmpName</td>
+                    <td>@emp.Age</td>
+                    <td>@emp.Designation</td>
+                    <td>@emp.Salary</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@emp.EmpId" class="btn btn-primary">Edit</a>
+                        <form asp-action="Delete" asp-route-id="@emp.EmpId" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No employees found.</p>
+}
